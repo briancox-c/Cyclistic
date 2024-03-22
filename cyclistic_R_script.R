@@ -22,14 +22,14 @@ month_labels <- c("Feb", "Apr", "Jun", "Aug", "Oct", "Dec")
 
 # read in and compile monthly tables into one yearly table
 
-setwd("./data/monthly")
+setwd(here("data/monthly"))
 
 year_data <-
         list.files() %>% 
         lapply(function(x) fread(x)) %>% 
         rbindlist()
 
-setwd("../..")
+setwd(here())
 
 # preview the data
 
@@ -236,10 +236,10 @@ smp <- slice_sample(year_data, prop = 0.1)
 # (commented out to prevent writing files during review)
 
 # fwrite(smp[!"duration_mins"],
-#        "./data/yearly/sampled_yearly_data.csv")
- 
+#        here("data/yearly/sampled_yearly_data.csv"))
+# 
 # fwrite(year_data[!"duration_mins"],
-#        "./data/yearly/clean_whole_year.csv")
+#        here("data/yearly/clean_whole_year.csv"))
 
 # remove temporary variables to keep environment tidy
 
@@ -311,7 +311,7 @@ table(smp$member_casual, smp$month_start)
 
 # read in the direction and distance data from BigQuery
 
-geo <- fread("./data/yearly/geo_calc_vars.csv")
+geo <- fread(here("data/yearly/geo_calc_vars.csv"))
 
 # exploratory analysis: plot some time-clustering variables
 
