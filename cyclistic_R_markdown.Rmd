@@ -1,5 +1,5 @@
 ---
-title: "Cyclistic Bike-Share Analysis:<br>Usage Patterns of Non-members and Members"
+title: "Cyclistic Bike-Share Analysis:<br>Usage Patterns of Non-members vs. Members"
 subtitle: "Capstone Project for Google Data Analytics Certificate"
 author: "Brian Cox"
 date: "March 5, 2024"
@@ -9,60 +9,67 @@ output:
     toc_float: true
     toc_depth: 3
     number_sections: false
+    code_folding: hide
 ---
 ===============================================================================
 \
 
-# Overview
+# Background
 
----
+Cyclistic is a fictional bikeshare company in Chicago.  A membership is not required to use the service, but some users do have memberships.  The company is conducting a campaign to convert its non-member users into members.  This analysis provides insight for that campaign by comparing how non-members and members use the service.
 
-### Background
+# Documents
 
-This data analysis is a capstone project for the Google Data Analytics Certificate.
+This document was written in R Markdown and is a report on:
 
-Cyclistic is a fictional bikeshare company in Chicago, IL, USA.  In this scenario, the company is conducting a campaign to convert its non-member users into annual members.  To that end, I am assigned to reveal insights into how non-members use the service compared to how members use it.
+- all of the data cleaning and transformation process
+- a small representative sample of the analysis process
 
-### Data
+I used R (with R Studio) and SQL (with BigQuery) to clean, transform, and analyze the data. I used Tableau and Excel for additional analysis, and Tableau for the final data visualization.
 
-At my disposal is a dataset of all Cyclistic trips taken in 2023, containing 12 CSV files (one for each month).  Each of the approximately 5.7 million records is an observation of one trip.  Original data available [here][box source data]
+The resulting files ([Github repo](https://github.com/briancox-c/Cyclistic) | [Box parent folder](https://app.box.com/s/ohes059e27dnedakt147zcyayikpggyv)) include:\
 
-The data contain the following variables (see appendix for schema):
+- R markdown - [Github] | [Box]
+- R script - [Github](https://github.com/briancox-c/Cyclistic/blob/main/cyclistic_R_script.R) | [Box](https://app.box.com/s/0jmubg01c2p8eoinjtzaz0iq45vcutld)
+- SQL script - [Github](https://github.com/briancox-c/Cyclistic/blob/main/cyclistic_SQL.sql) | [BigQuery](https://console.cloud.google.com/bigquery?sq=975725981649:07826d28c3dc41a789ad77b36d5f6b5a) | [Box](https://app.box.com/s/im7wen2y1jjdebrx924ahdgp0gell4rs)
+- Tableau static story - [Tableau Public](https://public.tableau.com/views/CyclisticStatic/Cyclistic?:language=en-US&:sid=&:display_count=n&:origin=viz_share_link)
+\
+
+# Data
+
+The dataset consists of .csv files covering the 5.7 million Cyclistic trips taken in 2023. Each record is an observation of one trip.  The data are open and are available [here](https://app.box.com/s/pmz7b6zl4h5n0exnawnwxhpvkuaw0hou)
+
+The dataset contains the following variables (see appendix for schema):
 
 1.	Ride ID: primary key
-2.	User membership status: member or “casual” (non-member)
+2.	User membership status: member or non-member (“casual”)
 3.	Type of bicycle used: classic, electric, or docked
 4.	Beginning and ending date-times of the trip, with precision in seconds
 5.	Beginning and ending coordinates (latitude and longitude) of the trip, with precision to five decimal places (roughly 4 feet)
-6.	Starting and ending station ID’s and station names
+6.	Starting and ending station ID’s and station names\
+\
 
 #### Limitations
 
-Notably, the data does not contain user identification.  This shortcoming is significantly limiting, because we don’t know how many unique users there were, how many different trips were taken by individual users, or what the usage patterns were for individual users.
-
-### Documents
-
-I used R (with R Studio) and SQL (with BigQuery) to clean and transform the data, and to perform most of the analysis.  I used Tableau and Excel for some analysis, and Tableau for the final data visualization.
-
-The resulting files ([Github repo][github cyclistic repo] | [Box parent folder][box cyclistic folder]) include:\
-
-- R markdown - [Github][github r markdown] | [Box][box r markdown]
-- R script - [Github][github r script] | [Box][box r script] 
-- SQL script - [Github][github sql script] | [BigQuery][bigquery script] | [Box]
-- Tableau story - [Tableau Public][tableau static story]
+The data does not contain user identification.  This is a significant shortcoming because we don't know which users took which trips.\
 \
-\ 
 
 # Data cleaning and Transformation
 
 ---
 
 ## Prepare environment and data
-
+\
 
 ##### _Load packages_
 
 ```{r set-environment, message = FALSE, warning = FALSE}
+
+packages <- c("here", "tidyverse", "data.table", "kableExtra")
+
+install.packages(setdiff(packages, rownames(installed.packages())))
+
+library(here)
 
 library(tidyverse)
 
@@ -72,7 +79,7 @@ library(kableExtra)
 ```
 \
 
-##### _Set some preferred defaults using functions and options_
+##### _Set some defaults using functions and options_
 
 ```{r set-defaults}
 
@@ -91,6 +98,8 @@ theme_update(legend.position = "none", plot.margin = margin(20,5,20,5))
 blues <- c(member = "lightblue", casual = "navy")
 
 month_labels <- c("Feb", "Apr", "Jun", "Aug", "Oct", "Dec")
+
+knitr::opts_chunk$set(warning = FALSE, message = FALSE)
 ```
 \
 
@@ -98,18 +107,14 @@ month_labels <- c("Feb", "Apr", "Jun", "Aug", "Oct", "Dec")
 
 ```{r compile-data}
 
-setwd("./data/monthly")
-
-file_list <- list.files()
-
-file_list
+setwd(here("data/monthly"))
 
 year_data <-
-        file_list %>% 
+        list.files() %>% 
         lapply(function(x) fread(x)) %>% 
         rbindlist()
 
-setwd("../..")
+setwd(here())
 ```
 \
 
@@ -123,7 +128,7 @@ summary(year_data)
 ```
 \
 
-## Identify and address invalid or messy data
+## Address invalid or messy data
 \
 A few things stand out in the summary:
 
@@ -142,7 +147,7 @@ colnames(year_data)[4] <- "time_end"
 ```
 \
 
-##### _Identify and investigate NA's_
+##### _Investigate NA's_
 
 ```{r quantify-na}
 
@@ -181,7 +186,7 @@ year_data <-
 ```
 \
 
-##### _Quantify and investigate zero coordinates_
+##### _Investigate zero coordinates_
 
 ```{r quantify-zero-coords}
 
@@ -201,7 +206,7 @@ There are 3 records with zero for an ending longitude or latitude. All 3 have th
 I can remove those records but I notice that two of them are labeled in the station names or id's as "Test."  First I'll look for other records with "Test" labels\
 \
 
-##### _Identify and investigate stations labeled "test"_
+##### _Investigate stations labeled "test"_
 
 ```{r identify-test-stations}
 
@@ -220,7 +225,7 @@ nrow(tests)
 view(tests)
 ```
 \
-Those all look like tests and there are only 106 additional, so I'll remove them too.\
+Those are identified as tests and there are only 106 additional, so I'll remove them too.\
 \
 
 ##### _Remove zero coordinates and tests from dataset_
@@ -286,13 +291,13 @@ cat(paste(percent_empty_start_id,
 \
 That's too many to throw away, and those fields are just labels anyway, so the fact that they're missing doesn't compromise the data.
 
-Since the station ID's and names are just labels, I can replace the empties with arbitrary values without changing the data substantively\
+Since the station ID's and names are just labels, I can replace the empties with new values without changing the data substantively\
 
 - For empty station id's, create a new station id by concatenating their latitude & longitude
 - For empty station names, create new station names which are equal to the station id's\
 \
 
-##### _Substitute in arbitrary values for empty station id's and names_
+##### _Substitute in new values for empty station id's and names_
 
 ```{r replace-empty-station-labels}
 
@@ -320,10 +325,10 @@ year_data <-
 ```
 \
 
-#### Investigate validity of datetime columns
+#### Investigate datetime columns
 \
-The summary above showed that the values in each datetime column are valid on their own.\
-But I created and investigated a duration column to check out the relationship between the two.\
+The summary above showed that the values in each datetime column (start and end) are valid on their own.\
+But I created and investigated a duration column (in minutes) to check out the relationship between the start and end times.\
 \
 
 ##### _Create duration column and look for outliers and strange values_
@@ -455,15 +460,15 @@ smp <- slice_sample(year_data, prop = 0.1)
 
 eval is set to FALSE so no data is actually written to disk when knitting for review.
 
-To keep the dataset tidy, the duration column is excluded from the export because it is a calculated, added field.
+To keep the dataset tidy, the duration column is excluded from the export because it is a calculated field.
 
 ```{r export-sampled-table, eval = FALSE}
 
 fwrite(smp[!"duration_mins"],
-       "./data/yearly/sampled_yearly_data.csv")
+       here("data/yearly/sampled_yearly_data.csv"))
 
 fwrite(year_data[!"duration_mins"],
-       "./data/yearly/clean_whole_year.csv")
+       here("data/yearly/clean_whole_year.csv"))
 ```
 \
 
@@ -472,7 +477,7 @@ fwrite(year_data[!"duration_mins"],
 ```{r clear-environment}
 
 rm(
-        file_list, tests,
+        tests,
         number_na_end_coords, percent_na_end_coords, number_zero_end_coords,
         na_durations, negative_durations, zero_durations, dayplus_durations,
         strange_duration_report, percent_strange_durations, min_duration,
@@ -484,6 +489,7 @@ rm(
 \
 
 ## Add calculated fields for use in analysis
+\
 
 Day Type
 
@@ -539,7 +545,7 @@ table(smp$member_casual, smp$month_start) %>% cable()
 #### Add geographically calculated fields
 \
 
-I used BigQuery to calculate the distance and direction of each ride, using the following query, because the same computations in R were too memory-intensive for my laptop, then exported the results.
+I used BigQuery to calculate the distance and direction of each ride because the same computations in R were too memory-intensive for my laptop. Below is the query I used.  I then exported the results from BigQuery.
 
 - Distance: in miles between start and end coordinates
 - Direction: cardinal direction from start to end, in integer degrees
@@ -571,7 +577,7 @@ CREATE TABLE cyclistic.geo AS
 
 ```{r read-geo-data}
 
-geo <- fread("./data/yearly/geo_calc_vars.csv")
+geo <- fread(here("data/yearly/geo_calc_vars.csv"))
 ```
 \
 \
@@ -619,6 +625,7 @@ ggplot(smp, aes(month_start, after_stat(prop), fill = member_casual)) +
         facet_grid(vars(member_casual), vars(day_type))
 ```
 \
+Discussion:\
 These differences, when combined with location data (maps and analysis are in the Tableau story) and the fact that non-members tend to take longer, slower rides (see below), suggest that non-members were more likely to use the service for recreation, while members were more likely to commute.  If the company could add or modify memberships to make them more attractive for recreational use, more non-members may convert.
 
 However, the data also show that non-members did a lot of commuting as well as recreating.  Therefore the company should also seek conversions among commuting non-members.  Acquiring and analyzing ride data that includes unique user id (even if anonymized or de-identified) could help uncover reasons why non-member commuters haven't become members. For example, were they commuting too infrequently or irregularly to justify membership cost? 
@@ -658,6 +665,7 @@ ggplot(dir_mwd_evening, aes(direction, after_stat(prop), group = member_casual,
         facet_grid(vars(member_casual))
 ```
 \
+Discussion:\
 The overall NNW - SSE pattern is interesting, if unsurprising given the orientation of the the Chicago lakefront. The prevalence of SSE rides in the morning and NNW rides in the evening is also interesting. But there is not a meaningful difference between members and non-members, so this measure did not make it to the final analysis.\ 
 \
 
@@ -712,6 +720,7 @@ ggplot(dist_box, aes(rideable_type, distance_miles)) +
         facet_grid(vars(member_casual), vars(day_type))
 ```
 \
+Discussion:\
 This difference may show that when commuting, members were more strategic about using electric bikes for longer rides to save time, and regular bikes for shorter rides to save money.  If the company could educate commuting non-members about strategies like this, they may be more likely to convert.
 
 On the other hand, some of this difference may be that because non-members were more likely to use the service for recreation, they may be have chosen regular bikes more because they weren't trying to save time. 
@@ -777,35 +786,25 @@ schema %>% kbl() %>%
 
         
 ### Links
+\
 
 ##### Project
 
-- [Github](https://github.com/briancox-c/Cyclistic) | All code 
-- [Box](https://app.box.com/s/ohes059e27dnedakt147zcyayikpggyv) | All code and source data
-- [BigQuery](https://console.cloud.google.com/bigquery?sq=975725981649:07826d28c3dc41a789ad77b36d5f6b5a) | SQL script
-- [Tableau Public](https://public.tableau.com/views/Cyclistic_17096823715860/Cyclistic?:language=en-US&:sid=&:display_count=n&:origin=viz_share_link) | Tableau story
+- [Github](https://github.com/briancox-c/Cyclistic) | All code\
+
+- [Box](https://app.box.com/s/ohes059e27dnedakt147zcyayikpggyv) | All code, source data (in the "monthly" folder), and cleaned and generated data (in the "yearly" folder)\
+
+- [BigQuery](https://console.cloud.google.com/bigquery?sq=975725981649:07826d28c3dc41a789ad77b36d5f6b5a)\
+
+- [Tableau Public](https://public.tableau.com/views/CyclisticStatic/Cyclistic?:language=en-US&:sid=&:display_count=n&:origin=viz_share_link) | Tableau story\
+\
 
 ##### Personal
 
-- [LinkedIn](https://www.linkedin.com/in/brian-cox-6905a6256/)
-- [Coursera](https://www.coursera.org/user/1fcea3b66e06e9b1d206bc66e9aa4039)
-- [Github](https://github.com/briancox-c)
-- [Tableau Public](https://public.tableau.com/app/profile/brian.cox3159/vizzes)
+- [LinkedIn](https://www.linkedin.com/in/brian-cox-6905a6256/)\
 
-Link references
+- [Coursera](https://www.coursera.org/user/1fcea3b66e06e9b1d206bc66e9aa4039)\
 
-[github cyclistic repo](https://github.com/briancox-c/Cyclistic)
-[github r script](https://github.com/briancox-c/Cyclistic/blob/main/cyclistic_R_script.R)
-[github r markdown]
-[github sql script](https://github.com/briancox-c/Cyclistic/blob/main/cyclistic_SQL.sql)
+- [Github](https://github.com/briancox-c)\
 
-[box cyclistic folder](https://app.box.com/s/tsk5a727knki8srve95xdrx6ckjxr97d)
-[box source data](https://app.box.com/s/pmz7b6zl4h5n0exnawnwxhpvkuaw0hou)
-[box r script](https://app.box.com/s/0jmubg01c2p8eoinjtzaz0iq45vcutld)
-[box r markdown]
-[box sql script](https://app.box.com/s/im7wen2y1jjdebrx924ahdgp0gell4rs)
-
-[tableau static story]
-
-[bigquery script](https://console.cloud.google.com/bigquery?sq=975725981649:07826d28c3dc41a789ad77b36d5f6b5a)
-
+- [Tableau Public](https://public.tableau.com/app/profile/brian.cox3159/vizzes)\
