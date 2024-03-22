@@ -29,7 +29,7 @@ I used R (with R Studio) and SQL (with BigQuery) to clean, transform, and analyz
 
 The resulting files ([Github repo](https://github.com/briancox-c/Cyclistic) | [Box parent folder](https://app.box.com/s/ohes059e27dnedakt147zcyayikpggyv)) include:\
 
-- R markdown - [Github] | [Box]
+- R markdown - [Github](https://github.com/briancox-c/cyclistic/blob/main/cyclistic_R_markdown.Rmd) | [Box](https://app.box.com/s/ndisu30i4lp3cb938qszhw4jthxwnlys)
 - R script - [Github](https://github.com/briancox-c/Cyclistic/blob/main/cyclistic_R_script.R) | [Box](https://app.box.com/s/0jmubg01c2p8eoinjtzaz0iq45vcutld)
 - SQL script - [Github](https://github.com/briancox-c/Cyclistic/blob/main/cyclistic_SQL.sql) | [BigQuery](https://console.cloud.google.com/bigquery?sq=975725981649:07826d28c3dc41a789ad77b36d5f6b5a) | [Box](https://app.box.com/s/im7wen2y1jjdebrx924ahdgp0gell4rs)
 - Tableau story - [Tableau Public](https://public.tableau.com/views/CyclisticStory_17111282404990/Cyclistic?:language=en-US&:sid=&:display_count=n&:origin=viz_share_link)
