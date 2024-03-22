@@ -1,5 +1,8 @@
 # load packages
 
+packages <- c("here", "tidyverse", "data.table", "kableExtra")
+
+install.packages(setdiff(packages, rownames(installed.packages())))
 
 library(here, quietly = TRUE)
 library(tidyverse, quietly = TRUE)
