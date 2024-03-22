@@ -4,4 +4,3 @@
 .Ruserdata
 data/monthly/*
 data/yearly/*
-!data/yearly/geo_calc_vars.csv
