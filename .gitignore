@@ -2,4 +2,6 @@
 .Rhistory
 .RData
 .Ruserdata
-data/
+data/monthly/*
+data/yearly/*
+!data/yearly/geo_calc_vars.csv
