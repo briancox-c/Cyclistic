@@ -37,7 +37,7 @@ The resulting files ([GitHub repo](https://github.com/briancox-c/Cyclistic) | [D
 
 # Data
 
-The dataset consists of .csv files covering the 5.7 million Cyclistic trips taken in 2023. Each record is an observation of one trip.  The data are open and are available [here](https://app.box.com/s/pmz7b6zl4h5n0exnawnwxhpvkuaw0hou)
+The dataset consists of .csv files covering the 5.7 million Cyclistic trips taken in 2023. Each record is an observation of one trip.  The data are open and are available [here](https://www.dropbox.com/scl/fi/lkjpfymd0jfbx1a6ovl8n/monthly_data.zip?rlkey=lprave7iebdst4wvvetz43qa2&dl=0)
 
 The dataset contains the following variables (see appendix for schema):
 
