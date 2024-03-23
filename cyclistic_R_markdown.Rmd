@@ -31,8 +31,7 @@ The resulting files ([GitHub repo](https://github.com/briancox-c/Cyclistic) | [D
 
 - R markdown - [GitHub](https://github.com/briancox-c/cyclistic/blob/main/cyclistic_R_markdown.Rmd) | [Dropbox]()
 - R script - [GitHub](https://github.com/briancox-c/Cyclistic/blob/main/cyclistic_R_script.R) | [Dropbox](https://www.dropbox.com/scl/fi/9cm0twd4wsicwi6md0ik6/cyclistic_R_script.R?rlkey=l7lj57iva9ser37jqsp2w4c3v&dl=0)
-- SQL script - [GitHub](https://github.com/briancox-c/Cyclistic/blob/main/cyclistic_SQL.sql) | [Dropbox](https://www.dropbox.com/scl/fi/clmundrrvvx0hnklk6km9/cyclistic_SQL.sql?rlkey=lve8p0tk8eyab7gr9ifcrl26a&dl=0) |
-[BigQuery](https://console.cloud.google.com/bigquery?sq=975725981649:07826d28c3dc41a789ad77b36d5f6b5a)
+- SQL script - [GitHub](https://github.com/briancox-c/Cyclistic/blob/main/cyclistic_SQL.sql) | [Dropbox](https://www.dropbox.com/scl/fi/clmundrrvvx0hnklk6km9/cyclistic_SQL.sql?rlkey=lve8p0tk8eyab7gr9ifcrl26a&dl=0)
 - Tableau story - [Tableau Public](https://public.tableau.com/views/CyclisticStory_17111282404990/Cyclistic?:language=en-US&:sid=&:display_count=n&:origin=viz_share_link)
 \
 
@@ -794,8 +793,6 @@ schema %>% kbl() %>%
 - [GitHub](https://github.com/briancox-c/Cyclistic) | All code\
 
 - [Dropbox](https://www.dropbox.com/scl/fo/n2wmk5q83nbp3snvseyi1/h?rlkey=k2lullylu2md2po138ivncdyg&dl=0) | All code and data\
-
-- [BigQuery](https://console.cloud.google.com/bigquery?sq=975725981649:07826d28c3dc41a789ad77b36d5f6b5a)\
 
 - [Tableau Public](https://public.tableau.com/views/CyclisticStory_17111282404990/Cyclistic?:language=en-US&:sid=&:display_count=n&:origin=viz_share_link) | Tableau story\
 \
