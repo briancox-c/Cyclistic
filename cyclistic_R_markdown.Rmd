@@ -27,11 +27,11 @@ This document was written in R Markdown and is a report on:
 
 I used R (with R Studio) and SQL (with BigQuery) to clean, transform, and analyze the data. I used Tableau and Excel for additional analysis, and Tableau for the final data visualization.
 
-The resulting files ([Github repo](https://github.com/briancox-c/Cyclistic) | [Box parent folder](https://app.box.com/s/ohes059e27dnedakt147zcyayikpggyv)) include:\
+The resulting files ([GitHub repo](https://github.com/briancox-c/Cyclistic) | [Box parent folder](https://app.box.com/s/ohes059e27dnedakt147zcyayikpggyv)) include:\
 
-- R markdown - [Github](https://github.com/briancox-c/cyclistic/blob/main/cyclistic_R_markdown.Rmd) | [Box](https://app.box.com/s/ndisu30i4lp3cb938qszhw4jthxwnlys)
-- R script - [Github](https://github.com/briancox-c/Cyclistic/blob/main/cyclistic_R_script.R) | [Box](https://app.box.com/s/0jmubg01c2p8eoinjtzaz0iq45vcutld)
-- SQL script - [Github](https://github.com/briancox-c/Cyclistic/blob/main/cyclistic_SQL.sql) | [BigQuery](https://console.cloud.google.com/bigquery?sq=975725981649:07826d28c3dc41a789ad77b36d5f6b5a) | [Box](https://app.box.com/s/im7wen2y1jjdebrx924ahdgp0gell4rs)
+- R markdown - [GitHub](https://github.com/briancox-c/cyclistic/blob/main/cyclistic_R_markdown.Rmd) | [Box](https://app.box.com/s/ndisu30i4lp3cb938qszhw4jthxwnlys)
+- R script - [GitHub](https://github.com/briancox-c/Cyclistic/blob/main/cyclistic_R_script.R) | [Box](https://app.box.com/s/0jmubg01c2p8eoinjtzaz0iq45vcutld)
+- SQL script - [GitHub](https://github.com/briancox-c/Cyclistic/blob/main/cyclistic_SQL.sql) | [BigQuery](https://console.cloud.google.com/bigquery?sq=975725981649:07826d28c3dc41a789ad77b36d5f6b5a) | [Box](https://app.box.com/s/im7wen2y1jjdebrx924ahdgp0gell4rs)
 - Tableau story - [Tableau Public](https://public.tableau.com/views/CyclisticStory_17111282404990/Cyclistic?:language=en-US&:sid=&:display_count=n&:origin=viz_share_link)
 \
 
@@ -790,7 +790,7 @@ schema %>% kbl() %>%
 
 ##### Project
 
-- [Github](https://github.com/briancox-c/Cyclistic) | All code\
+- [GitHub](https://github.com/briancox-c/Cyclistic) | All code\
 
 - [Box](https://app.box.com/s/ohes059e27dnedakt147zcyayikpggyv) | All code, source data (in the "monthly" folder), and cleaned and generated data (in the "yearly" folder)\
 
@@ -805,6 +805,6 @@ schema %>% kbl() %>%
 
 - [Coursera](https://www.coursera.org/user/1fcea3b66e06e9b1d206bc66e9aa4039)\
 
-- [Github](https://github.com/briancox-c)\
+- [GitHub](https://github.com/briancox-c)\
 
 - [Tableau Public](https://public.tableau.com/app/profile/brian.cox3159/vizzes)\
