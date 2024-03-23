@@ -29,7 +29,7 @@ I used R (with R Studio) and SQL (with BigQuery) to clean, transform, and analyz
 
 The resulting files ([GitHub repo](https://github.com/briancox-c/Cyclistic) | [Dropbox parent folder](https://www.dropbox.com/scl/fo/n2wmk5q83nbp3snvseyi1/h?rlkey=k2lullylu2md2po138ivncdyg&dl=0)) include:\
 
-- R markdown - [GitHub](https://github.com/briancox-c/cyclistic/blob/main/cyclistic_R_markdown.Rmd) | [Dropbox]()
+- R markdown - [GitHub](https://github.com/briancox-c/cyclistic/blob/main/cyclistic_R_markdown.Rmd) | [Dropbox](https://www.dropbox.com/scl/fi/5a28k49a7zuqf1b4564is/cyclistic_R_markdown.Rmd?rlkey=wpn1n1us50g4qslij7ojmi2mn&dl=0)
 - R script - [GitHub](https://github.com/briancox-c/Cyclistic/blob/main/cyclistic_R_script.R) | [Dropbox](https://www.dropbox.com/scl/fi/9cm0twd4wsicwi6md0ik6/cyclistic_R_script.R?rlkey=l7lj57iva9ser37jqsp2w4c3v&dl=0)
 - SQL script - [GitHub](https://github.com/briancox-c/Cyclistic/blob/main/cyclistic_SQL.sql) | [Dropbox](https://www.dropbox.com/scl/fi/clmundrrvvx0hnklk6km9/cyclistic_SQL.sql?rlkey=lve8p0tk8eyab7gr9ifcrl26a&dl=0)
 - Tableau story - [Tableau Public](https://public.tableau.com/views/CyclisticStory_17111282404990/Cyclistic?:language=en-US&:sid=&:display_count=n&:origin=viz_share_link)
@@ -790,9 +790,9 @@ schema %>% kbl() %>%
 
 ##### Project
 
-- [GitHub](https://github.com/briancox-c/Cyclistic) | All code\
+- [GitHub](https://github.com/briancox-c/Cyclistic) | Code\
 
-- [Dropbox](https://www.dropbox.com/scl/fo/n2wmk5q83nbp3snvseyi1/h?rlkey=k2lullylu2md2po138ivncdyg&dl=0) | All code and data\
+- [Dropbox](https://www.dropbox.com/scl/fo/n2wmk5q83nbp3snvseyi1/h?rlkey=k2lullylu2md2po138ivncdyg&dl=0) | Code and data\
 
 - [Tableau Public](https://public.tableau.com/views/CyclisticStory_17111282404990/Cyclistic?:language=en-US&:sid=&:display_count=n&:origin=viz_share_link) | Tableau story\
 \
