@@ -1,5 +1,5 @@
 ---
-title: "Cyclistic Bike-Share Analysis:<br>Usage Patterns of Non-members vs. Members"
+title: "Cyclistic Bike-Share Analysis:<br>Comparing usage between members and non-members"
 subtitle: "Capstone Project for Google Data Analytics Certificate"
 author: "Brian Cox"
 date: "March 5, 2024"
