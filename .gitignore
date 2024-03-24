@@ -2,5 +2,8 @@
 .Rhistory
 .RData
 .Ruserdata
+cyclistic_R_markdown.html
 data/monthly/*
+!data/monthly/README.md
 data/yearly/*
+!data/yearly/README.md
