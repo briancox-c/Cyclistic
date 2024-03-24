@@ -7,3 +7,4 @@ data/monthly/*
 !data/monthly/README.md
 data/yearly/*
 !data/yearly/README.md
+!data/yearly/geo_calc_vars.csv
