@@ -1913,7 +1913,7 @@ knitr::opts_chunk$set(warning = FALSE, message = FALSE)</code></pre>
 <pre class="r"><code>setwd(here(&quot;data/monthly&quot;))
 
 year_data &lt;-
-        list.files() %&gt;% 
+        list.files(pattern = &quot;*.csv&quot;) %&gt;% 
         lapply(function(x) fread(x)) %&gt;% 
         rbindlist()
 
