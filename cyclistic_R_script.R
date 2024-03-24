@@ -25,7 +25,7 @@ month_labels <- c("Feb", "Apr", "Jun", "Aug", "Oct", "Dec")
 setwd(here("data/monthly"))
 
 year_data <-
-        list.files() %>% 
+        list.files(pattern = "*.csv") %>% 
         lapply(function(x) fread(x)) %>% 
         rbindlist()
 
